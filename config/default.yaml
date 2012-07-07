@@ -6,6 +6,3 @@
 
 server:
   port: 3000
-
-trainer:
-  secsBetweenTrain: 5

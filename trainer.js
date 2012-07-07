@@ -10,7 +10,7 @@ const DB_PATH = __dirname + "/db/traindata.db";
 // Private members
 var trainData = [],
 	trainQueue = [],
-	lastTrainLength = 0;
+	trainScheduled = false;
 
 // Accept new images
 process.on('message', function(m) {
@@ -19,31 +19,27 @@ process.on('message', function(m) {
 		output: m.output
 	});
 	trainQueue.push(m.id);
+	if (!trainScheduled) {
+		trainScheduled = true;
+		process.nextTick(function() {
+			train();
+		});
+	}
 });
 
 // Trains entire trainData array into new neural net
 function train() {
-	if (lastTrainLength < trainData.length) {
-		console.log('Training ' + trainData.length + ' records.');
-		var mind = new brain.NeuralNetwork(),
-			result = mind.train(trainData);
-		fs.writeFileSync(DB_PATH, JSON.stringify(trainData), 'utf8');
-		process.send({
-			trained: trainQueue,
-			result: result,
-			mind: mind.toJSON()
-		});
-		trainQueue = [];
-		lastTrainLength = trainData.length;
-	}
-}
-
-// Train at regular intervals
-function setTrainTimeout() {
-	setTimeout(function() {
-		train();
-		setTrainTimeout();
-	}, config.trainer.secsBetweenTrain * 1000);
+	console.log('Training ' + trainData.length + ' records.');
+	var mind = new brain.NeuralNetwork(),
+		result = mind.train(trainData);
+	fs.writeFileSync(DB_PATH, JSON.stringify(trainData), 'utf8');
+	process.send({
+		trained: trainQueue,
+		result: result,
+		mind: mind.toJSON()
+	});
+	trainQueue = [];
+	trainScheduled = false;
 }
 
 // Init
@@ -64,7 +60,10 @@ Seq()
 		else
 			console.log("Could not load image DB from file.", err);
 	})
-	.seq(setTrainTimeout)
+	.seq(function callTrain() {
+		if (trainData.length)
+			train();
+	})
 	.catch(function trainError(err) {
 		console.log("Could not start trainer.", err);
 	});

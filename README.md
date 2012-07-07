@@ -20,10 +20,11 @@ Just run app.js:
 Then visit http://localhost:3000 in your browser.
 
 ## What is this?
-MindEye was just a fun little proof-of-concept to play with neural nets.  It is
-not meant to be launched on a webserver (much of its logic is blocking) or used
-by multiple users.  It doesn't maintain its state or do anything you'd want it
-to do on a production server.  But it's fun to play with :)
+MindEye was just a fun little proof-of-concept to play with neural nets.  While
+it's designed with non-blocking logic and should, in theory, play nice on a
+server with multiple users, extensive testing has not been done and abuse is
+very possible.  Use with care.  But it will save its training between launches,
+and is fun to play with :)
 
 ## Credits
 MindEye was created for the hell of it by Tom Frost in 2012.

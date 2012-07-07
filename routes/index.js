@@ -1,6 +1,5 @@
 var brain = require('brain'),
-	mind = new brain.NeuralNetwork(),
-	trainData = [];
+	mind = require('../mind');
 
 exports.index = function(req, res) {
   res.render('index', { title: 'MindEye' })
@@ -16,22 +15,20 @@ exports.train = function(req, res) {
 		}))
 	}
 	else {
-		var trainSpecs = {
-			input: train.pixels,
-			output: {}
-		};
-		trainSpecs.output[train.name.toLowerCase()] = 1;
-		trainData.push(trainSpecs);
-		mind = new brain.NeuralNetwork();
-		var result = mind.train(trainData, {
-			log: true,
-			logPeriod: 10
+		mind.train(train.pixels, train.name, function(err, result) {
+			if (err) {
+				res.send(JSON.stringify({
+					success: false,
+					error: err
+				}));
+			}
+			else {
+				res.send(JSON.stringify({
+					success: true,
+					result: result
+				}));
+			}
 		});
-		console.log(result);
-		res.send(JSON.stringify({
-			success: true,
-			result: result
-		}));
 	}
 };
 
@@ -47,11 +44,7 @@ exports.guess = function(req, res) {
 	else {
 		res.send(JSON.stringify({
 			success: true,
-			result: mind.run(guess.pixels)
+			result: mind.guess(guess.pixels)
 		}));
 	}
-};
-
-exports.net = function(req, res) {
-	res.send(mind.toJSON());
 };

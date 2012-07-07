@@ -25,7 +25,6 @@ app.configure('production', function(){
 
 // Routes
 app.get('/', routes.index);
-app.get('/net', routes.net);
 app.post('/train', routes.train);
 app.post('/guess', routes.guess);
 

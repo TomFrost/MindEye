@@ -23,8 +23,10 @@
 					name = key;
 				}
 			}
-			if (name)
+			if (name) {
+				weight = Math.floor(weight * 100000) / 1000;
 				setStatus("Result: '" + name + "'. Certainty: " + weight + "%.");
+			}
 			else
 				setStatus("The neural net needs training!");
 			if (console) console.log('GUESS SUCCESS', data);
@@ -39,8 +41,9 @@
 	function trainComplete(data, status) {
 		if (!data.success) trainFail(data, status);
 		else {
-			setStatus('Trained to error margin ' + data.result.error +
-				' in ' + data.result.iterations + ' iterations.');
+			var margin = Math.floor(data.result.error * 100000) / 1000;
+			setStatus('Trained to error margin ' + margin +
+				'% in ' + data.result.iterations + ' iterations.');
 			if (console) console.log('TRAIN SUCCESS', data);
 		}
 	}

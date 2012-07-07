@@ -16,7 +16,8 @@
     "express": "2.5.11",
     "ejs": ">= 0.0.1",
     "brain": "~0.6.0",
-    "config": "~0.4.15"
+    "config": "~0.4.15",
+    "seq": ">= 0.3.5"
   },
   "devDependencies": {}
 }

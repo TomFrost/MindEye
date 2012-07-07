@@ -1,0 +1,9 @@
+runtime.json
+development.yaml
+node_modules
+
+Thumbs.db
+.Trashes
+.DS_Store
+
+.idea

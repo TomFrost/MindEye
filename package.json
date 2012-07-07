@@ -1,0 +1,22 @@
+{
+  "author": "Tom Frost <tom@frosteddesign.com>",
+  "name": "MindEye",
+  "description": "A proof-of-concept drawing recognition app.",
+  "version": "0.0.1",
+  "homepage": "https://github.com/TomFrost/MindEye",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/TomFrost/MindEye.git"
+  },
+  "main": "app.js",
+  "engines": {
+    "node": "~0.6.18"
+  },
+  "dependencies": {
+    "express": "2.5.11",
+    "ejs": ">= 0.0.1",
+    "brain": "~0.6.0",
+    "config": "~0.4.15"
+  },
+  "devDependencies": {}
+}

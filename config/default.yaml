@@ -1,0 +1,8 @@
+#
+# Configuration settings for MindEye
+#
+# Important: Use 2 spaces for indent. YAML does not support tabs.
+#
+
+server:
+  port: 3000

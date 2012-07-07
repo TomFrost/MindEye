@@ -1,0 +1,33 @@
+body {
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+    color: #00B7FF;
+}
+
+#pixels {
+    overflow: hidden;
+    width: 525px;
+    border-top: 1px solid #000;
+    border-left: 1px solid #000;
+}
+
+.pixel {
+    background: #fff;
+    width: 20px;
+    height: 20px;
+    border-right: 1px solid #000;
+    border-bottom: 1px solid #000;
+    float: left;
+}
+
+.pixel.on {
+    background: #000;
+}
+
+#controls {
+    margin: 20px 0 20px 100px;
+    width: 525px;
+}

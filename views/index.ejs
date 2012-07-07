@@ -1,0 +1,13 @@
+<h1><%= title %></h1>
+<div id="pixels">
+	<% for (var i = 0; i < 625; i++) { %>
+		<div class="pixel"></div>
+	<% } %>
+</div>
+<div id="result">Draw a picture, then either Train or Guess!</div>
+<div id="controls">
+	<input type="text" id="train-text" />
+	<input type="button" value="Train" id="train" />
+	<input type="button" value="Guess" id="guess" />
+	<input type="button" value="Erase" id="erase" />
+</div>

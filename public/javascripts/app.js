@@ -77,6 +77,7 @@
 
 	jdoc.on('click', '#erase', function() {
 		$('.pixel').removeClass('on');
+		$('#train-text').val('');
 	});
 
 	jdoc.on('click', '#train', function() {
